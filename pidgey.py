@@ -46,7 +46,7 @@ def main():
     msg = str(int(columns) * '=')
     print(msg)
     print('Результат вычислений:')
-    print(convert_num_sys(value, f_num_sys, t_num_sys)[2:])
+    print(convert_num_sys(value, f_num_sys, t_num_sys))
 
 
 main()
