@@ -1,12 +1,9 @@
 import os
 
-# todo написать обработку на случай ввода неверных символов или цифр,
-#                         не используемых в данной системе счисления
 
 # Функция выбора системы счисления
 def get_num_sys(msg):
     while True:
-        print()
         num_sys = print(msg)
         num_sys = input('>>>')
         num_sys = num_sys.upper()
@@ -36,17 +33,38 @@ def convert_num_sys(value, f_num_sys, t_num_sys):
 def main():
     msg = 'Выберите начальную систему счисления: BIN, OCT, DEC, HEX'
     f_num_sys = get_num_sys(msg)  # Получаем исходную систему исчисления
-    print('Перевод из %sой системы\n' % f_num_sys)
-    print('Введите значение:')
-    value = input('>>>')  # Получаем исходное число
+    print('Перевод из {}ичной системы'.format(f_num_sys))
+    print()
     msg = 'Выберите систему счисления для результата: BIN, OCT, DEC, HEX'
     # Получаем систему счисления, в которую необходимо перевести
     t_num_sys = get_num_sys(msg)
-    rows, columns = os.popen('stty size', 'r').read().split()
-    msg = str(int(columns) * '=')
-    print(msg)
-    print('Результат вычислений:')
-    print(convert_num_sys(value, f_num_sys, t_num_sys))
+    print()
+    print('Введите значение:')
+    value = input('>>>')  # Получаем исходное число
+    print()
+    try:
+        rows, columns = os.popen('stty size', 'r').read().split()
+        res = convert_num_sys(value, f_num_sys, t_num_sys)
+        msg = str(int(columns) * '-')
+        print(msg)
+        print('Результат вычислений:')
+        print(res)
+        print()
+    except ValueError:
+        c = int(columns)
+        msg = ' Неверное число. Проверьте систему счисления '.center(c, '!')
+        print(msg)
+    except TypeError:
+        print('!!! Это не число. Выходим. !!!'.center(int(columns), ' '))
+    print(str(int(columns) * '='))
+    print('Pidgey'.center(int(columns), ' '))
+    print(str(int(columns) * '='))
+    main()
+
+rows, columns = os.popen('stty size', 'r').read().split()
+print(str(int(columns) * '='))
+print('Pidgey v2.4'.center(int(columns), ' '))
+print(str(int(columns) * '='))
 
 
 main()
