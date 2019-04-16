@@ -67,5 +67,5 @@ print(str(int(columns) * '='))
 print('Pidgey v2.4'.center(int(columns), ' '))
 print(str(int(columns) * '='))
 
-
-main()
+if __name__ == "__main__":
+    main()
